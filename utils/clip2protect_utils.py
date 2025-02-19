@@ -81,7 +81,7 @@ def black_box(img_gen,target_eval,model):
 
 
         fr_model_m = irse.MobileFaceNet(512)
-        fr_model_m.load_state_dict(torch.load('./models/mobile_face.pth'))
+        fr_model_m.load_state_dict(torch.load('./models/mobile_face.pth', weights_only=True))
         fr_model_m.cuda()
         fr_model_m.eval()
         with torch.no_grad():
@@ -94,7 +94,7 @@ def black_box(img_gen,target_eval,model):
     elif model == 'ir152':
         
         fr_model_152 = ir152.IR_152((112, 112))
-        fr_model_152.load_state_dict(torch.load('./models/ir152.pth'))
+        fr_model_152.load_state_dict(torch.load('./models/ir152.pth',weights_only=True))
         fr_model_152.cuda()
         fr_model_152.eval()
         with torch.no_grad():
@@ -107,7 +107,7 @@ def black_box(img_gen,target_eval,model):
     elif model == 'facenet':
 
         fr_model_facenet = facenet.InceptionResnetV1(num_classes=8631, device='cuda')
-        fr_model_facenet.load_state_dict(torch.load('./models/facenet.pth'))
+        fr_model_facenet.load_state_dict(torch.load('./models/facenet.pth',weights_only=True))
         fr_model_facenet.cuda()
         fr_model_facenet.eval()
         with torch.no_grad():
@@ -120,7 +120,7 @@ def black_box(img_gen,target_eval,model):
     else:
 
         fr_model_50 = irse.Backbone(50, 0.6, 'ir_se')
-        fr_model_50.load_state_dict(torch.load('./models/irse50.pth'))
+        fr_model_50.load_state_dict(torch.load('./models/irse50.pth',weights_only=True))
         fr_model_50.cuda()
         fr_model_50.eval()
         with torch.no_grad():
@@ -133,6 +133,7 @@ def black_box(img_gen,target_eval,model):
 arr0 = 0
 def quan(arr,model):
     global arr0,arr1,arr2
+    print(model, arr[0])
     if model == 'mobile_face':
         if arr[0] > 0.301611:
             arr0 += 1
