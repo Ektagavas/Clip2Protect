@@ -247,6 +247,6 @@ class Adversarial_Opt:
                      with torch.no_grad():
                         success_count = quan(black_box(img_gen.detach(),target_eval,self.model),self.model)
 
-                     torchvision.utils.save_image(img_gen_, f"{self.protected_face_dir}/{str(ff)+'_'+str(i).zfill(5)}.jpg", normalize=True, range=(0, 1))
+                     torchvision.utils.save_image(img_gen_, f"{self.protected_face_dir}/{str(ff)+'_'+str(i).zfill(5)}.jpg", normalize=True, value_range=(0, 1))
 
         print(f"Total successes: {success_count[0]} out of {len(self.path)}")
