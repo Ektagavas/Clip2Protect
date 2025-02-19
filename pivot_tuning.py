@@ -73,6 +73,6 @@ class GeneratorTuning:
             for noise in noises:
                 noise_.append(noise.cpu())
             self.noise_save.append(noises)
-            torchvision.utils.save_image(img_gen, f"{self.inverted_images}/{image_name}.jpg", normalize=True, range=(-1, 1))
+            torchvision.utils.save_image(img_gen, f"{self.inverted_images}/{image_name}.jpg", normalize=True, value_range=(-1, 1))
         torch.save(self.noise_save, self.noise_path)
 
