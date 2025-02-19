@@ -159,6 +159,12 @@ def get_target(target_choice,margin):
         target_eval = read_img('008793.jpg', 0.5, 0.5, device)[:,:,145-margin:920+margin,202-margin:775+margin]
     elif target_choice == '2':
         target = read_img('085807.jpg', 0.5, 0.5, device)[:,:,187-margin:891+margin,244-margin:764+margin]
+        # path = '/content/Clip2Protect/input_images/000737.jpg'
+        # bb_src1 = alignment(Image.open(path))
+        # # bb_src1 = [266,234,791,905]
+        # trans1 = trans()
+        # img_src1 = trans1(Image.open(path)).unsqueeze(0)[:,:,round(bb_src1[1])-margin:round(bb_src1[3])+margin,round(bb_src1[0])-margin:round(bb_src1[2])+margin]
+        # target_eval = (F.interpolate((img_src1-0.5)*2, size=(112,112), mode='bilinear')).cuda()
         target_eval = read_img('047073.jpg', 0.5, 0.5, device)[:,:,234-margin:905+margin,266-margin:791+margin]
     elif target_choice == '3':
         target = read_img('116481.jpg', 0.5, 0.5, device)[:,:,214-margin:955+margin,188-margin:773+margin]
