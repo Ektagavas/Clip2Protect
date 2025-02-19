@@ -17,7 +17,7 @@ class PivotTuning:
         self.num_steps = args.num_steps
         self.lr = args.gt_lr
         self.G_ = Generator(1024, 512, 8)
-        self.G_.load_state_dict(torch.load('pretrained_models/stylegan2-ffhq-config-f.pt')["g_ema"], strict=False)
+        self.G_.load_state_dict(torch.load('pretrained_models/stylegan2-ffhq-config-f.pt',weights_only=True)["g_ema"], strict=False)
         self.G_ = self.G_.cuda()
         self.l2_criterion = torch.nn.MSELoss(reduction='mean')
         self.optimizer = optim.Adam(self.G_.parameters(), lr=self.lr)
@@ -49,9 +49,9 @@ class PivotTuning:
 
 class GeneratorTuning:
     def __init__(self, args):
-        self.latents = torch.load(args.latent_path).unsqueeze(1)
+        self.latents = torch.load(args.latent_path,weights_only=True).unsqueeze(1)
         self.g_ema = Generator(1024, 512, 8)
-        self.g_ema.load_state_dict(torch.load('pretrained_models/stylegan2-ffhq-config-f.pt')["g_ema"], strict=False)
+        self.g_ema.load_state_dict(torch.load('pretrained_models/stylegan2-ffhq-config-f.pt',weights_only=True)["g_ema"], strict=False)
         self.g_ema = self.g_ema.eval().cuda()
         self.dataloader = args.dataloader
         self.checkpoint_dir = args.checkpoint_dir
